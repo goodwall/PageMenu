@@ -9,7 +9,7 @@
 import UIKit
 
 extension CAPSPageMenu : UIGestureRecognizerDelegate {
-    func handleMenuItemTap(_ gestureRecognizer : UITapGestureRecognizer) {
+    @objc func handleMenuItemTap(_ gestureRecognizer : UITapGestureRecognizer) {
         let tappedPoint : CGPoint = gestureRecognizer.location(in: menuScrollView)
         
         if tappedPoint.y < menuScrollView.frame.height {
@@ -86,7 +86,11 @@ extension CAPSPageMenu : UIGestureRecognizerDelegate {
                 }
                 
                 let timerInterval : TimeInterval = Double(configuration.scrollAnimationDurationOnMenuItemTap) * 0.001
-                tapTimer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(CAPSPageMenu.scrollViewDidEndTapScrollingAnimation), userInfo: nil, repeats: false)
+                tapTimer = Timer.scheduledTimer(timeInterval: timerInterval,
+                                                target: self,
+                                                selector: #selector(CAPSPageMenu.scrollViewDidEndTapScrollingAnimation),
+                                                userInfo: nil,
+                                                repeats: false)
             }
         }
     }
