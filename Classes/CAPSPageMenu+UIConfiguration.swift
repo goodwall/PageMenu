@@ -42,6 +42,8 @@ extension CAPSPageMenu {
                 configuration.menuItemSeparatorRoundEdges = value
             case let .menuItemFont(value):
                 configuration.menuItemFont = value
+            case let .menuItemSelectedFont(value):
+                configuration.menuItemSelectedFont = value
             case let .menuItemSeparatorPercentageHeight(value):
                 configuration.menuItemSeparatorPercentageHeight = value
             case let .menuItemWidth(value):
