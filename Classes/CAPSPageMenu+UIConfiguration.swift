@@ -153,7 +153,6 @@ extension CAPSPageMenu {
         if configuration.useMenuLikeSegmentedControl {
             menuScrollView.isScrollEnabled = false
             menuScrollView.contentSize = CGSize(width: self.view.frame.width, height: configuration.menuHeight)
-            configuration.menuMargin = 0.0
         } else {
             menuScrollView.contentSize = CGSize(width: (configuration.menuItemWidth + configuration.menuMargin) * CGFloat(controllerArray.count) + configuration.menuMargin, height: configuration.menuHeight)
         }
@@ -235,7 +234,8 @@ extension CAPSPageMenu {
         var selectionIndicatorFrame : CGRect = CGRect()
         
         if configuration.useMenuLikeSegmentedControl {
-            selectionIndicatorFrame = CGRect(x: 0.0, y: configuration.menuHeight - configuration.selectionIndicatorHeight, width: self.view.frame.width / CGFloat(controllerArray.count), height: configuration.selectionIndicatorHeight)
+            let selectionIndicatorWidth = (self.view.frame.width-self.configuration.menuMargin*2) / CGFloat(self.controllerArray.count)
+            selectionIndicatorFrame = CGRect(x: configuration.menuMargin, y: configuration.menuHeight - configuration.selectionIndicatorHeight, width: selectionIndicatorWidth, height: configuration.selectionIndicatorHeight)
         } else if configuration.menuItemWidthBasedOnTitleTextWidth {
             selectionIndicatorFrame = CGRect(x: configuration.menuMargin, y: configuration.menuHeight - configuration.selectionIndicatorHeight, width: menuItemWidths[0], height: configuration.selectionIndicatorHeight)
         } else {
