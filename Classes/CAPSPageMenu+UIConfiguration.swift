@@ -176,9 +176,8 @@ extension CAPSPageMenu {
             if configuration.useMenuLikeSegmentedControl {
                 //**************************拡張*************************************
                 if menuItemMargin > 0 {
-                    let marginSum = menuItemMargin * CGFloat(controllerArray.count + 1)
-                    let menuItemWidth = (self.view.frame.width - marginSum) / CGFloat(controllerArray.count)
-                    menuItemFrame = CGRect(x: CGFloat(menuItemMargin * (index + 1)) + menuItemWidth * CGFloat(index), y: 0.0, width: CGFloat(self.view.frame.width) / CGFloat(controllerArray.count), height: configuration.menuHeight)
+                    let menuItemWidth = (self.view.frame.width - menuItemMargin*2) / CGFloat(controllerArray.count)
+                    menuItemFrame = CGRect(x: menuItemMargin + (menuItemWidth * CGFloat(index)), y: 0.0, width: menuItemWidth, height: configuration.menuHeight)
                 } else {
                     menuItemFrame = CGRect(x: self.view.frame.width / CGFloat(controllerArray.count) * CGFloat(index), y: 0.0, width: CGFloat(self.view.frame.width) / CGFloat(controllerArray.count), height: configuration.menuHeight)
                 }
