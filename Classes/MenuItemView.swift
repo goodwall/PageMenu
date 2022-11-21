@@ -42,7 +42,9 @@ class MenuItemView: UIView {
         if pageMenu.configuration.useMenuLikeSegmentedControl {
             //**************************拡張*************************************
             if pageMenu.menuItemMargin > 0 {
-                let menuItemWidth = (pageMenu.view.frame.width - pageMenu.menuItemMargin*2) / CGFloat(pageMenu.controllerArray.count)
+                let interItemSpace: CGFloat = pageMenu.menuItemMargin/2
+                let totalIterItemSpace: CGFloat = interItemSpace * CGFloat(pageMenu.controllerArray.count-1)
+                let menuItemWidth = (pageMenu.view.frame.width - pageMenu.menuItemMargin*2 - totalIterItemSpace) / CGFloat(pageMenu.controllerArray.count)
                 self.setUpMenuItemView(menuItemWidth, menuScrollViewHeight: pageMenu.configuration.menuHeight, indicatorHeight: pageMenu.configuration.selectionIndicatorHeight, separatorPercentageHeight: pageMenu.configuration.menuItemSeparatorPercentageHeight, separatorWidth: pageMenu.configuration.menuItemSeparatorWidth, separatorRoundEdges: pageMenu.configuration.menuItemSeparatorRoundEdges, menuItemSeparatorColor: pageMenu.configuration.menuItemSeparatorColor)
             } else {
                 self.setUpMenuItemView(CGFloat(pageMenu.view.frame.width) / CGFloat(pageMenu.controllerArray.count), menuScrollViewHeight: pageMenu.configuration.menuHeight, indicatorHeight: pageMenu.configuration.selectionIndicatorHeight, separatorPercentageHeight: pageMenu.configuration.menuItemSeparatorPercentageHeight, separatorWidth: pageMenu.configuration.menuItemSeparatorWidth, separatorRoundEdges: pageMenu.configuration.menuItemSeparatorRoundEdges, menuItemSeparatorColor: pageMenu.configuration.menuItemSeparatorColor)

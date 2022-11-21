@@ -176,8 +176,11 @@ extension CAPSPageMenu {
             if configuration.useMenuLikeSegmentedControl {
                 //**************************拡張*************************************
                 if menuItemMargin > 0 {
-                    let menuItemWidth = (self.view.frame.width - menuItemMargin*2) / CGFloat(controllerArray.count)
-                    menuItemFrame = CGRect(x: menuItemMargin + (menuItemWidth * CGFloat(index)), y: 0.0, width: menuItemWidth, height: configuration.menuHeight)
+                    let interItemSpace: CGFloat = menuItemMargin/2
+                    let totalIterItemSpace: CGFloat = interItemSpace * CGFloat(controllerArray.count-1)
+                    let offsetX: CGFloat = index == 0 ? 0 : interItemSpace
+                    let menuItemWidth = (self.view.frame.width - menuItemMargin*2 - totalIterItemSpace) / CGFloat(controllerArray.count)
+                    menuItemFrame = CGRect(x: menuItemMargin + offsetX + (menuItemWidth * CGFloat(index)), y: 0.0, width: menuItemWidth, height: configuration.menuHeight)
                 } else {
                     menuItemFrame = CGRect(x: self.view.frame.width / CGFloat(controllerArray.count) * CGFloat(index), y: 0.0, width: CGFloat(self.view.frame.width) / CGFloat(controllerArray.count), height: configuration.menuHeight)
                 }
@@ -233,7 +236,9 @@ extension CAPSPageMenu {
         var selectionIndicatorFrame : CGRect = CGRect()
         
         if configuration.useMenuLikeSegmentedControl {
-            let selectionIndicatorWidth = (self.view.frame.width-self.configuration.menuMargin*2) / CGFloat(self.controllerArray.count)
+            let interItemSpace: CGFloat = self.configuration.menuMargin/2
+            let totalIterItemSpace: CGFloat = interItemSpace * CGFloat(self.controllerArray.count-1)
+            let selectionIndicatorWidth = (self.view.frame.width-self.configuration.menuMargin*2-totalIterItemSpace) / CGFloat(self.controllerArray.count)
             selectionIndicatorFrame = CGRect(x: configuration.menuMargin, y: configuration.menuHeight - configuration.selectionIndicatorHeight, width: selectionIndicatorWidth, height: configuration.selectionIndicatorHeight)
         } else if configuration.menuItemWidthBasedOnTitleTextWidth {
             selectionIndicatorFrame = CGRect(x: configuration.menuMargin, y: configuration.menuHeight - configuration.selectionIndicatorHeight, width: menuItemWidths[0], height: configuration.selectionIndicatorHeight)

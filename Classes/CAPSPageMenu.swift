@@ -162,7 +162,7 @@ open class CAPSPageMenu: UIViewController {
 
 
 
-extension CAPSPageMenu {    
+extension CAPSPageMenu {
     // MARK: - Handle Selection Indicator
     func moveSelectionIndicator(_ pageIndex: Int) {
         if pageIndex >= 0 && pageIndex < controllerArray.count {
@@ -171,8 +171,11 @@ extension CAPSPageMenu {
                 var selectionIndicatorX : CGFloat = 0.0
                 
                 if self.configuration.useMenuLikeSegmentedControl {
-                    selectionIndicatorWidth = (self.view.frame.width-self.configuration.menuMargin*2) / CGFloat(self.controllerArray.count)
-                    selectionIndicatorX = (CGFloat(pageIndex) * selectionIndicatorWidth) + self.configuration.menuMargin
+                    let interItemSpace: CGFloat = self.configuration.menuMargin/2
+                    let totalIterItemSpace: CGFloat = interItemSpace * CGFloat(self.controllerArray.count-1)
+                    let offsetX: CGFloat = pageIndex == 0 ? 0 : interItemSpace
+                    selectionIndicatorWidth = (self.view.frame.width-self.configuration.menuMargin*2-totalIterItemSpace) / CGFloat(self.controllerArray.count)
+                    selectionIndicatorX = (CGFloat(pageIndex) * selectionIndicatorWidth) + self.configuration.menuMargin + offsetX
                 } else if self.configuration.menuItemWidthBasedOnTitleTextWidth {
                     selectionIndicatorWidth = self.menuItemWidths[pageIndex]
                     selectionIndicatorX += self.configuration.menuMargin
